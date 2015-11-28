@@ -58,3 +58,7 @@ target/
 
 # sublime text files
 *.sublime-*
+
+# dev files
+task
+design
