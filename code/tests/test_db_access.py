@@ -2,6 +2,7 @@
 """
 import sys
 import os.path
+import pytest
 here_folder = os.path.dirname(__file__)
 sys.path.insert(0, here_folder + '/..')
 import db_access
@@ -44,12 +45,8 @@ def test_delete_user():
 def test_delete_error():
     """try to delete a non existing document
     """
-    try:
+    with pytest.raises(DB_Exception):
         db_access.delete_user("mille")
-        raise Exception
-    except Exception as e:
-        # assert the correct Exception is thrown
-        assert isinstance(e, DB_Exception)
 
 
 def test_delete_all():
