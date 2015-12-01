@@ -11,6 +11,13 @@ from pprint import pprint
 from pdb import set_trace as bp
 
 
+@pytest.fixture
+def clear_users():
+    """deletes all users
+    """
+    db_access.delete_all_users()
+
+
 def test_create_user():
     """create a user with only one name, assert something is returned
     """
@@ -49,7 +56,7 @@ def test_delete_error():
         db_access.delete_user("mille")
 
 
-def test_delete_all():
+def test_delete_all(clear_users):
     """insert two users and delete both at once
     """
     user1 = {"name": "jean-louis"}
@@ -63,16 +70,15 @@ def test_delete_all():
     print "users after"
 
 
-def test_get_all_users():
+def test_get_all_users(clear_users):
     """insert two users and get the list of them
     """
     user1 = {"name": "jean-louis"}
     user2 = {"name": "jean-michel"}
     db_access.create_user(user1)
     db_access.create_user(user2)
-
     users = db_access.get_all_users()
-    pprint(users)
+    assert len(users) == 2
 
 if __name__ == '__main__':
-    test_delete_all()
+    test_get_all_users()
