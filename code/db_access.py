@@ -21,6 +21,19 @@ def get_user(user_id):
     return users.find_one({"_id": user_id})
 
 
+def get_all_users():
+    """gets all users from the database and returns in a list
+    """
+    cursor = users.find()
+    return [user for user in cursor]
+
+
+def delete_all_users():
+    """delete all users
+    """
+    users.delete_many({})
+
+
 def create_user(user):
     """creates a user in the database
     """
