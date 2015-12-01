@@ -11,7 +11,7 @@ from pprint import pprint
 from pdb import set_trace as bp
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def clear_users():
     """deletes all users
     """
@@ -56,7 +56,7 @@ def test_delete_error():
         db_access.delete_user("mille")
 
 
-def test_delete_all(clear_users):
+def test_delete_all():
     """insert two users and delete both at once
     """
     user1 = {"name": "jean-louis"}
@@ -70,7 +70,7 @@ def test_delete_all(clear_users):
     print "users after"
 
 
-def test_get_all_users(clear_users):
+def test_get_all_users():
     """insert two users and get the list of them
     """
     user1 = {"name": "jean-louis"}
